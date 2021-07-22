@@ -19,4 +19,4 @@ jobs:
           with:
             azure-devops-project-url: https://dev.azure.com/shubhamsahare/DemoTesting
             azure-pipeline-name: 'testpipeline'
-            azure-devops-token: ${{ secrets.xxom4psdszhc3cifwkwyiz6vwk2z2nt3n26tqophdq6yh2g6iucq }}
+            azure-devops-token: ${{ secrets.AZURE_DEVOPS_SSHKEY }}
