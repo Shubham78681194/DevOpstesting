@@ -1,25 +1,28 @@
-name: deploy ansible
+name: Create a GitHub action to run the Ansible playbook
+
 
 on:
-  push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
+ # push:
+ # branches:
+ #   - master
+ # pull_request:
+ #  branches:
+ #   - master
+ repository_dispatch:
+    types: deploy-ansible
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
   deployAnsible:
-    needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # or glober-runner
     steps:
-    - uses: actions/checkout@v1
-    - uses: ./.github/actions/ansible
-      with: 
-        playbook: playbook.yml
-        inventory: hosts
+    - uses: actions/checkout@v2
+    - name: Run the Ansible playbook defined in KB #13662.
+      run: |
+      
+        sudo docker run --rm -t -v $(pwd):/ansible -v ~/.ssh:/root/.ssh -e ANSIBLE_STDOUT_CALLBACK=debug -e AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID_RR }}" -e AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY_RR }}" -e AWS_DEFAULT_REGION="us-east-1" -e WORKSPACE=/ansible talentincnyc/ansible:${{ secrets.ANSIBLE_VERSION }} bash -c "ansible-playbook deployments/ansible/roles/add-users-ec2-instances/tasks/create-three-users.yml -i deployments/ansible/ec2.py -l "tag_Env_staging:&tag_DeployGroup_EC2WithNewUser" -u ubuntu -e env=staging' 
+        
+        # AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID_RR }}" >>  "AWS_ACCESS_KEY_ID=< AWS_ACCESS_KEY_ID >"
+        # AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID_RR }}" >>  "AWS_SECRET_ACCESS_KEY=< AWS_SECRET_ACCESS_KEY >" 
+        # WORKSPACE=/ansible talentincnyc/ansible:${{ secrets.ANSIBLE_VERSION }} >> talentincnyc/ansible:2.9.7py3.6
+        
+
