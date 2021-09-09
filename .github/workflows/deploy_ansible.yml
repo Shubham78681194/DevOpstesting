@@ -2,14 +2,13 @@ name: Create a GitHub action to run the Ansible playbook
 
 
 on:
- # push:
- # branches:
- #   - master
- # pull_request:
- #  branches:
- #   - master
- repository_dispatch:
-    types: deploy-ansible
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+ 
 
 jobs:
   deployAnsible:
