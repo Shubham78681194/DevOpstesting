@@ -14,7 +14,7 @@ jobs:
   deployAnsible:
     runs-on: ubuntu-latest
     steps:
-    - uses: azure/docker-login@v1
+    - uses: docker/login-action@v1
       with:
           username: 'arvindrsingh'
           password: 'SIADtUJ6gf2qpOPTaFwh'
