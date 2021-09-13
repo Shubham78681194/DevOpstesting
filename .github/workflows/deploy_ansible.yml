@@ -21,4 +21,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run the Ansible playbook defined in KB #13662.
       run: |
-        sudo docker run --rm -t -u ubuntu talentincnyc/ansible:2.9.7py3.6 
+        sudo docker run --rm -t -u ubuntu ansible/ansible
