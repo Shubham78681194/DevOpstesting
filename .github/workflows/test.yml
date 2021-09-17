@@ -1,0 +1,17 @@
+name: Create a GitHub action to run the Ansible playbook
+
+
+on:
+  repository_dispatch:
+    types: run-test3
+    
+  workflow_dispatch:
+ 
+
+jobs:
+  deployAnsible:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run the Ansible playbook defined in KB #13662.
+      run: |
