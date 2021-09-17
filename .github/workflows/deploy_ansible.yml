@@ -4,6 +4,8 @@ name: Create a GitHub action to run the Ansible playbook
 on:
   repository_dispatch:
     types: run-test
+    
+  workflow_dispatch:
  
 
 jobs:
