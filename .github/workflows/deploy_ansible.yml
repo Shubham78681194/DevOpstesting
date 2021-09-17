@@ -3,7 +3,7 @@ name: Create a GitHub action to run the Ansible playbook
 
 on:
   repository_dispatch:
-    types: run-test
+    types: run-test2
     
   workflow_dispatch:
  
