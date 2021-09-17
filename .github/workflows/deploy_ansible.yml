@@ -2,23 +2,15 @@ name: Create a GitHub action to run the Ansible playbook
 
 
 on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
+  repository_dispatch:
+    types: run-test
  
 
 jobs:
   deployAnsible:
     runs-on: ubuntu-latest
     steps:
-    - uses: docker/login-action@v1
-      with:
-          username: 'arvindrsingh'
-          password: 'SIADtUJ6gf2qpOPTaFwh'
     - uses: actions/checkout@v2
     - name: Run the Ansible playbook defined in KB #13662.
       run: |
-        sudo docker run --rm -t -u ubuntu ansible/ansible
+        
