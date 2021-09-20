@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       parameterized_user:
-        description: 'user1'     
+        description: 'parameterized user to add'     
         required: true
-        default: 'hello this is Shubham'
+        default: 'user1'
       tags:
         description: 'Test scenario tags'
 jobs:
