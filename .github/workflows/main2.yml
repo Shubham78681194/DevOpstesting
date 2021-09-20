@@ -3,16 +3,16 @@ name: manually passing parameters
 on: 
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'     
+      parameterized_user:
+        description: 'user1'     
         required: true
-        default: 'warning'
+        default: 'hello this is Shubham'
       tags:
         description: 'Test scenario tags'
 jobs:
-  printInputs:
+  Instance:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
+        echo "parameterized_user: ${{ github.event.inputs.parameterized_user }}"
         echo "Tags: ${{ github.event.inputs.tags }}"
